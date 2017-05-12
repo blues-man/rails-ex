@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  annotations:
+    pipeline.alpha.openshift.io/uses: '[{"name": "rails-postgres-example", "namespace": "testing", "kind":
+      "DeploymentConfig"}]'
+  creationTimestamp: null
+  labels:
+    app: jenkins-pipeline-testing
+    name: testing-pipeline
+    template: application-template-testing-pipeline
+  name: testing-pipeline
+spec:
+  output: {}
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    type: None
+  strategy:
+    jenkinsPipelineStrategy:
+      jenkinsfile: |-
+        node('maven') {
+        stage 'tag'
+        openshiftTag(namespace: 'development', sourceStream: 'rails-postgres-example', sourceTag: 'latest', destinationNamespace: 'testing', destinationStream: 'rails-postgres-example', destinationTag: 'latest')
+        stage 'deploy'
+        openshiftDeploy(deploymentConfig: 'rails-postgres-example', namespace: 'testing')
+        }
+    type: JenkinsPipeline
+  triggers:
+  - github:
+      secret: secret101
+    type: GitHub
+  - generic:
+      secret: secret101
+    type: Generic
+status:
+  lastVersion: 0
