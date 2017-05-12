@@ -1,0 +1,6 @@
+node('rails') {
+  stage 'build'
+  openshiftBuild(buildConfig: 'rails-ex', showBuildLogs: 'true')
+  stage 'deploy'
+  openshiftDeploy(deploymentConfig: 'rails-ex')
+}
