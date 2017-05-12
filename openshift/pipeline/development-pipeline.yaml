@@ -2,7 +2,7 @@ apiVersion: v1
 kind: BuildConfig
 metadata:
   annotations:
-    pipeline.alpha.openshift.io/uses: '[{"name": "rails-postgres-example", "namespace": "development", "kind":
+    pipeline.alpha.openshift.io/uses: '[{"name": "rails-postgresql-example", "namespace": "development", "kind":
       "DeploymentConfig"}]'
   creationTimestamp: null
   labels:
@@ -22,9 +22,9 @@ spec:
       jenkinsfile: |-
         node('maven') {
         stage 'build'
-        openshiftBuild(buildConfig: 'rails-postgres-example', showBuildLogs: 'true', namespace: 'development')
+        openshiftBuild(buildConfig: 'rails-postgresql-example', showBuildLogs: 'true', namespace: 'development')
         stage 'deploy'
-        openshiftDeploy(deploymentConfig: 'rails-postgres-example', namespace: 'development')
+        openshiftDeploy(deploymentConfig: 'rails-postgresql-example', namespace: 'development')
         }
     type: JenkinsPipeline
   triggers:

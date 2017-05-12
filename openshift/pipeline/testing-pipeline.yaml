@@ -22,7 +22,7 @@ spec:
       jenkinsfile: |-
         node('maven') {
         stage 'tag'
-        openshiftTag(namespace: 'development', sourceStream: 'rails-postgresql-example', sourceTag: 'latest', destinationNamespace: 'testing', destinationStream: 'rails-postgres-example', destinationTag: 'latest')
+        openshiftTag(namespace: 'development', sourceStream: 'rails-postgresql-example', sourceTag: 'latest', destinationNamespace: 'testing', destinationStream: 'rails-postgresql-example', destinationTag: 'latest')
         stage 'deploy'
         openshiftDeploy(deploymentConfig: 'rails-postgresql-example', namespace: 'testing')
         }
