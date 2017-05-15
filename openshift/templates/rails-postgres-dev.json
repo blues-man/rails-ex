@@ -480,7 +480,7 @@
       "displayName": "Git Repository URL",
       "required": true,
       "description": "The URL of the repository with your application source code.",
-      "value": "https://github.com/openshift/rails-ex.git"
+      "value": "https://github.com/blues-man/rails-ex.git"
     },
     {
       "name": "SOURCE_REPOSITORY_REF",
